@@ -1,0 +1,22 @@
+{
+  "name": "space-time",
+  "version": "0.5.0",
+  "description": "Human readable data size and time calculations.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha './test/**/*.js'"
+  },
+  "keywords": [
+    "humanize",
+    "bytes",
+    "date",
+    "time",
+    "ms"
+  ],
+  "author": "Pete Boere <pete@the-echoplex.net> (https://github.com/peteboere)",
+  "license": "MIT",
+  "devDependencies": {
+    "chai": "~3.5.0",
+    "mocha": "~2.4.5"
+  }
+}
