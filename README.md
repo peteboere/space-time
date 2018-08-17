@@ -15,6 +15,13 @@ ms('52w 5h 1d');
 ms('52 weeks, 5 hours and 1 day to be precise');
 ````
 
+Time functions support `Date.now()` relative calculations:
+
+````js
+ms.now('+1 week'); // Date.now() + ms('1 week')
+seconds.now('-7 days'); // seconds(Date.now() - ms('7 days'))
+````
+
 Other size/time conversion units available:
 
 ````js

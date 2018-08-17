@@ -1,12 +1,8 @@
-"use strict";
+'use strict';
 
-const expect = require('chai').expect;
+const {expect} = require('chai');
 const spaceTime = require('../index');
-const bytes = spaceTime.bytes;
-const kilobytes = spaceTime.kilobytes;
-const megabytes = spaceTime.megabytes;
-const gigabytes = spaceTime.gigabytes;
-const terabytes = spaceTime.terabytes;
+const {bytes, kilobytes, megabytes, gigabytes, terabytes} = spaceTime;
 
 const kilobyte = 1024;
 const megabyte = Math.pow(kilobyte, 2);

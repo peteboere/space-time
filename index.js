@@ -1,7 +1,9 @@
-"use strict";
+'use strict';
+
+const self = module.exports = {};
 
 /*
- Space
+ * Space
  */
 const kilobyte = 1024;
 const megabyte = Math.pow(kilobyte, 2);
@@ -16,9 +18,9 @@ function bytes(size) {
     const patt = /(\d*\.?\d+)\s*(t|g|m|k|b)?/ig;
     let bytes = 0;
     let match;
-    while (match = patt.exec(size)) {
-        let factor = parseFloat(match[1]);
-        let unit = match[2] && match[2].toLowerCase();
+    while ((match = patt.exec(size))) {
+        const factor = parseFloat(match[1]);
+        const unit = match[2] && match[2].toLowerCase();
         switch (unit) {
             case 't':
                 bytes += factor * terabyte;
@@ -53,9 +55,16 @@ function terabytes(size) {
     return (bytes(size) / terabyte) || 0;
 }
 
+Object.assign(self, {
+    bytes,
+    kilobytes,
+    megabytes,
+    gigabytes,
+    terabytes,
+});
 
 /*
- Time
+ * Time
  */
 const second = 1000;
 const minute = second * 60;
@@ -71,12 +80,12 @@ function ms(time) {
         return typeof time === 'number' ? time : 0;
     }
 
-    const patt = /(\d*\.?\d+)\s*(y|m(?:[ot])|l|w|d|h|m|s)?/ig;
+    const patt = /(\d*\.?\d+)\s*(y|m(?:[sot])|l|w|d|h|m|s)?/ig;
     let ms = 0;
     let match;
-    while (match = patt.exec(time)) {
-        let factor = parseFloat(match[1]);
-        let unit = match[2] && match[2].toLowerCase();
+    while ((match = patt.exec(time))) {
+        const factor = parseFloat(match[1]);
+        const unit = match[2] && match[2].toLowerCase();
         switch (unit) {
             case 'y':
                 ms += factor * year;
@@ -84,9 +93,15 @@ function ms(time) {
             case 'l':
                 ms += factor * lunarMonth;
                 break;
-            case 'mo':
+            case 'ms':
+                ms += factor;
+                break;
+            case 'mo': // fallthrough
             case 'mt':
                 ms += factor * month;
+                break;
+            case 'm':
+                ms += factor * minute;
                 break;
             case 'w':
                 ms += factor * week;
@@ -96,9 +111,6 @@ function ms(time) {
                 break;
             case 'h':
                 ms += factor * hour;
-                break;
-            case 'm':
-                ms += factor * minute;
                 break;
             case 's':
                 ms += factor * second;
@@ -133,20 +145,27 @@ function years(time) {
     return (months(time) / 12) || 0;
 }
 
-
-module.exports = {
-    bytes: bytes,
-    kilobytes: kilobytes,
-    megabytes: megabytes,
-    gigabytes: gigabytes,
-    terabytes: terabytes,
-
-    ms: ms,
-    seconds: seconds,
-    minutes: minutes,
-    hours: hours,
-    days: days,
-    weeks: weeks,
-    months: months,
-    years: years,
+const timeHandlers = {
+    ms,
+    seconds,
+    minutes,
+    hours,
+    days,
+    weeks,
+    months,
+    years,
 };
+
+for (const fn of Object.values(timeHandlers)) {
+    fn.now = (arg, {now=Date.now}={}) => {
+        const directionPatt = /^\s*([+-])\s*/;
+        const m = directionPatt.exec(arg);
+        if (! m) {
+            throw new TypeError(`Relative time argument requires a '+' or '-' prefix`);
+        }
+        arg = arg.replace(directionPatt, '');
+        return fn((m[1] === '-') ? (now() - ms(arg)) : (now() + ms(arg)));
+    };
+}
+
+Object.assign(self, timeHandlers);

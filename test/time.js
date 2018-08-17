@@ -1,21 +1,13 @@
-"use strict";
+'use strict';
 
-const expect = require('chai').expect;
+const {expect} = require('chai');
 const spaceTime = require('../index');
-const ms = spaceTime.ms;
-const seconds = spaceTime.seconds;
-const minutes = spaceTime.minutes;
-const hours = spaceTime.hours;
-const days = spaceTime.days;
-const weeks = spaceTime.weeks;
-const months = spaceTime.months;
-const years = spaceTime.years;
+const {ms, seconds, minutes, hours, days, weeks, months, years} = spaceTime;
 
 const second = 1000;
 const minute = second * 60;
 const hour = minute * 60;
 const day = hour * 24;
-const week = day * 7;
 const lunarMonth = day * 29.53059;
 const year = day * 365.25;
 const month = (year / 12);
@@ -202,5 +194,26 @@ describe('Time', function () {
         expect(years('365.25 days')).to.equal(expected);
         expect(years('12mths')).to.equal(expected);
         expect(years('1 month and 11 months')).to.equal(expected);
+    });
+
+    it('*.now() functions should create relative values', function () {
+        const now = Date.now();
+        expect(() => ms.now('1m')).to.throw(TypeError, /requires a '\+' or '-' prefix/);
+        expect(ms.now('+1m')).to.be.above(now);
+        expect(ms.now(' + 1m')).to.be.above(now);
+        expect(ms.now('-1m')).to.be.below(now);
+        expect(ms.now(' - 1m')).to.be.below(now);
+
+        const fixedNow = Date.now();
+        const options = {now: () => fixedNow};
+        expect(ms.now('+0s', options)).to.equal(fixedNow);
+        expect(ms.now('+2ms', options)).to.equal(fixedNow + 2);
+
+        ['2d', '10s', 500, '1 day', '5 mins'].forEach(time => {
+            [ms, seconds, minutes, hours, days, weeks, months, years].forEach(fn => {
+                expect(fn.now(`+${time}`, options)).to.equal(fn(fixedNow + ms(time)));
+                expect(fn.now(`-${time}`, options)).to.equal(fn(fixedNow - ms(time)));
+            });
+        });
     });
 });
