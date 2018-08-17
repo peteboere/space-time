@@ -1,6 +1,6 @@
 {
   "name": "space-time",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Human readable data size and time calculations.",
   "main": "index.js",
   "scripts": {
