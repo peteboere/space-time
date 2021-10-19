@@ -1,8 +1,7 @@
-'use strict';
+import chai from 'chai';
+import {ms, seconds, minutes, hours, days, weeks, months, years} from '../index.js';
 
-const {expect} = require('chai');
-const spaceTime = require('../index');
-const {ms, seconds, minutes, hours, days, weeks, months, years} = spaceTime;
+const {expect} = chai;
 
 const second = 1000;
 const minute = second * 60;

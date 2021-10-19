@@ -1,7 +1,3 @@
-'use strict';
-
-const self = module.exports = {};
-
 /*
  * Space
  */
@@ -10,7 +6,7 @@ const megabyte = Math.pow(kilobyte, 2);
 const gigabyte = Math.pow(kilobyte, 3);
 const terabyte = Math.pow(kilobyte, 4);
 
-function bytes(size) {
+export function bytes(size) {
     if (typeof size !== 'string') {
         return typeof size === 'number' ? size : 0;
     }
@@ -42,26 +38,18 @@ function bytes(size) {
     return bytes;
 }
 
-function kilobytes(size) {
+export function kilobytes(size) {
     return (bytes(size) / kilobyte) || 0;
 }
-function megabytes(size) {
+export function megabytes(size) {
     return (bytes(size) / megabyte) || 0;
 }
-function gigabytes(size) {
+export function gigabytes(size) {
     return (bytes(size) / gigabyte) || 0;
 }
-function terabytes(size) {
+export function terabytes(size) {
     return (bytes(size) / terabyte) || 0;
 }
-
-Object.assign(self, {
-    bytes,
-    kilobytes,
-    megabytes,
-    gigabytes,
-    terabytes,
-});
 
 /*
  * Time
@@ -75,7 +63,7 @@ const lunarMonth = day * 29.53059;
 const year = day * 365.25;
 const month = (year / 12);
 
-function ms(time) {
+export function ms(time) {
     if (typeof time !== 'string') {
         return typeof time === 'number' ? time : 0;
     }
@@ -123,25 +111,25 @@ function ms(time) {
     return ms;
 }
 
-function seconds(time) {
+export function seconds(time) {
     return (ms(time) / 1000) || 0;
 }
-function minutes(time) {
+export function minutes(time) {
     return (seconds(time) / 60) || 0;
 }
-function hours(time) {
+export function hours(time) {
     return (minutes(time) / 60) || 0;
 }
-function days(time) {
+export function days(time) {
     return (hours(time) / 24) || 0;
 }
-function weeks(time) {
+export function weeks(time) {
     return (days(time) / 7) || 0;
 }
-function months(time) {
+export function months(time) {
     return (days(time) / (365.25 / 12)) || 0;
 }
-function years(time) {
+export function years(time) {
     return (months(time) / 12) || 0;
 }
 
@@ -167,5 +155,3 @@ for (const fn of Object.values(timeHandlers)) {
         return fn((m[1] === '-') ? (now() - ms(arg)) : (now() + ms(arg)));
     };
 }
-
-Object.assign(self, timeHandlers);

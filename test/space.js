@@ -1,8 +1,7 @@
-'use strict';
+import chai from 'chai';
+import {bytes, kilobytes, megabytes, gigabytes, terabytes} from '../index.js';
 
-const {expect} = require('chai');
-const spaceTime = require('../index');
-const {bytes, kilobytes, megabytes, gigabytes, terabytes} = spaceTime;
+const {expect} = chai;
 
 const kilobyte = 1024;
 const megabyte = Math.pow(kilobyte, 2);
