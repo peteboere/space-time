@@ -1,9 +1,7 @@
 Human readable data size and time calculations.
 
 ````js
-const spaceTime = require('space-time');
-const bytes = spaceTime.bytes;
-const ms = spaceTime.ms;
+import {bytes, ms} from 'space-time';
 
 bytes('1mb');
 bytes('12.5Mb');
