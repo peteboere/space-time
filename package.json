@@ -3,9 +3,9 @@
   "version": "1.0.1",
   "description": "Human readable data size and time calculations.",
   "main": "./index.js",
-  "exports": "./index.js",
   "scripts": {
-    "test": "mocha './test/**/*.js'"
+    "test": "mocha './test/**/*.js'",
+    "ts-check": "tsc -p jsconfig.json"
   },
   "keywords": [
     "humanize",
