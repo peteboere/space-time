@@ -69,9 +69,6 @@ export function ms(time) {
     return ms;
 }
 
-/** @memberof ms */
-ms.now = relativeTimeHandler(ms);
-
 /**
  * @param {string | number} time - Time expression or milliseconds
  * @returns {number} Seconds
@@ -79,9 +76,6 @@ ms.now = relativeTimeHandler(ms);
 export function seconds(time) {
     return (ms(time) / 1000) || 0;
 }
-
-/** @memberof seconds */
-seconds.now = relativeTimeHandler(seconds);
 
 /**
  * @param {string | number} time - Time expression or milliseconds
@@ -91,9 +85,6 @@ export function minutes(time) {
     return (seconds(time) / 60) || 0;
 }
 
-/** @memberof minutes */
-minutes.now = relativeTimeHandler(minutes);
-
 /**
  * @param {string | number} time - Time expression or milliseconds
  * @returns {number} Hours
@@ -101,9 +92,6 @@ minutes.now = relativeTimeHandler(minutes);
 export function hours(time) {
     return (minutes(time) / 60) || 0;
 }
-
-/** @memberof hours */
-hours.now = relativeTimeHandler(hours);
 
 /**
  * @param {string | number} time - Time expression or milliseconds
@@ -113,9 +101,6 @@ export function days(time) {
     return (hours(time) / 24) || 0;
 }
 
-/** @memberof days */
-days.now = relativeTimeHandler(days);
-
 /**
  * @param {string | number} time - Time expression or milliseconds
  * @returns {number} Weeks
@@ -123,9 +108,6 @@ days.now = relativeTimeHandler(days);
 export function weeks(time) {
     return (days(time) / 7) || 0;
 }
-
-/** @memberof weeks */
-weeks.now = relativeTimeHandler(weeks);
 
 /**
  * @param {string | number} time - Time expression or milliseconds
@@ -135,9 +117,6 @@ export function months(time) {
     return (days(time) / (365.25 / 12)) || 0;
 }
 
-/** @memberof months */
-months.now = relativeTimeHandler(months);
-
 /**
  * @param {string | number} time - Time expression or milliseconds
  * @returns {number} Years
@@ -146,7 +125,13 @@ export function years(time) {
     return (months(time) / 12) || 0;
 }
 
-/** @memberof years */
+ms.now = relativeTimeHandler(ms);
+seconds.now = relativeTimeHandler(seconds);
+minutes.now = relativeTimeHandler(minutes);
+hours.now = relativeTimeHandler(hours);
+days.now = relativeTimeHandler(days);
+weeks.now = relativeTimeHandler(weeks);
+months.now = relativeTimeHandler(months);
 years.now = relativeTimeHandler(years);
 
 /**

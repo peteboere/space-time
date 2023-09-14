@@ -4,7 +4,8 @@
   "description": "Human readable data size and time calculations.",
   "main": "./index.js",
   "scripts": {
-    "test": "mocha './test/**/*.js'",
+    "lint": "eslint --fix .",
+    "test": "node --test test/*.js",
     "ts-check": "tsc -p jsconfig.json"
   },
   "keywords": [
@@ -17,9 +18,9 @@
   "author": "Pete Boere <pete@the-echoplex.net> (https://github.com/peteboere)",
   "license": "MIT",
   "devDependencies": {
-    "chai": "~4.3.4",
-    "eslint": "~8.0.1",
-    "mocha": "~9.1.3"
+    "@types/node": "~20.6.0",
+    "eslint": "~8.49.0",
+    "typescript": "~5.2.2"
   },
   "repository": {
     "type": "git",

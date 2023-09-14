@@ -1,7 +1,6 @@
-import chai from 'chai';
+import {describe, it} from 'node:test';
+import {strict as assert} from 'node:assert';
 import {bytes, kilobytes, megabytes, gigabytes, terabytes} from '../index.js';
-
-const {expect} = chai;
 
 const kilobyte = 1024;
 const megabyte = Math.pow(kilobyte, 2);
@@ -9,109 +8,110 @@ const gigabyte = Math.pow(kilobyte, 3);
 const terabyte = Math.pow(kilobyte, 4);
 
 describe('Space', function () {
+
     it('bytes() should take a variety of size descriptions', function () {
         let expected;
 
         expected = 0;
-        expect(bytes('')).to.equal(expected);
-        expect(bytes(null)).to.equal(expected);
-        expect(bytes(undefined)).to.equal(expected);
-        expect(bytes('0')).to.equal(expected);
-        expect(bytes(0)).to.equal(expected);
+        assert.equal(bytes(''), expected);
+        assert.equal(bytes(null), expected);
+        assert.equal(bytes(undefined), expected);
+        assert.equal(bytes('0'), expected);
+        assert.equal(bytes(0), expected);
 
         expected = 1;
-        expect(bytes('1')).to.equal(expected);
-        expect(bytes(1)).to.equal(expected);
+        assert.equal(bytes('1'), expected);
+        assert.equal(bytes(1), expected);
 
         expected = kilobyte;
-        expect(bytes('1k')).to.equal(expected);
-        expect(bytes('1K')).to.equal(expected);
-        expect(bytes('1kb')).to.equal(expected);
-        expect(bytes('1 kilobyte')).to.equal(expected);
-        expect(bytes('1.0kb')).to.equal(expected);
+        assert.equal(bytes('1k'), expected);
+        assert.equal(bytes('1K'), expected);
+        assert.equal(bytes('1kb'), expected);
+        assert.equal(bytes('1 kilobyte'), expected);
+        assert.equal(bytes('1.0kb'), expected);
 
         expected = kilobyte + (kilobyte / 2);
-        expect(bytes('1.5kb')).to.equal(expected);
-        expect(bytes('.5kb and 1kb')).to.equal(expected);
-        expect(bytes('1.5 kilobytes')).to.equal(expected);
+        assert.equal(bytes('1.5kb'), expected);
+        assert.equal(bytes('.5kb and 1kb'), expected);
+        assert.equal(bytes('1.5 kilobytes'), expected);
 
         expected = megabyte;
-        expect(bytes('1m')).to.equal(expected);
-        expect(bytes('1MB')).to.equal(expected);
-        expect(bytes('1 megabyte')).to.equal(expected);
+        assert.equal(bytes('1m'), expected);
+        assert.equal(bytes('1MB'), expected);
+        assert.equal(bytes('1 megabyte'), expected);
 
         expected = gigabyte;
-        expect(bytes('1g')).to.equal(expected);
-        expect(bytes('1GB')).to.equal(expected);
-        expect(bytes('1 gig')).to.equal(expected);
-        expect(bytes('1 gigabyte')).to.equal(expected);
+        assert.equal(bytes('1g'), expected);
+        assert.equal(bytes('1GB'), expected);
+        assert.equal(bytes('1 gig'), expected);
+        assert.equal(bytes('1 gigabyte'), expected);
 
         expected = terabyte;
-        expect(bytes('1t')).to.equal(expected);
-        expect(bytes('1T')).to.equal(expected);
-        expect(bytes('1 tb')).to.equal(expected);
-        expect(bytes('1 terabyte')).to.equal(expected);
+        assert.equal(bytes('1t'), expected);
+        assert.equal(bytes('1T'), expected);
+        assert.equal(bytes('1 tb'), expected);
+        assert.equal(bytes('1 terabyte'), expected);
     });
 
     it('bytes() should take combinations of times', function () {
         let expected;
 
         expected = megabyte + (3 * kilobyte);
-        expect(bytes('1M 3KB')).to.equal(expected);
-        expect(bytes('1mb 3kb')).to.equal(expected);
-        expect(bytes('1 megabyte and 3 kilobytes')).to.equal(expected);
+        assert.equal(bytes('1M 3KB'), expected);
+        assert.equal(bytes('1mb 3kb'), expected);
+        assert.equal(bytes('1 megabyte and 3 kilobytes'), expected);
 
         expected = (2 * terabyte) + (10 * gigabyte) + (5 * megabyte) + (20 * kilobyte);
-        expect(bytes('2 terabytes, 10 gigabytes, 5 megabytes and 20 kilobytes to be exact')).to.equal(expected);
-        expect(bytes('2tb + 10gb + 5mb + 20kb')).to.equal(expected);
+        assert.equal(bytes('2 terabytes, 10 gigabytes, 5 megabytes and 20 kilobytes to be exact'), expected);
+        assert.equal(bytes('2tb + 10gb + 5mb + 20kb'), expected);
     });
 
     it('kilobytes() should work in the same way, but return kilobytes', function () {
         let expected;
 
         expected = 0;
-        expect(kilobytes('0')).to.equal(expected);
-        expect(kilobytes(undefined)).to.equal(expected);
+        assert.equal(kilobytes('0'), expected);
+        assert.equal(kilobytes(undefined), expected);
 
         expected = 1;
-        expect(kilobytes('1024')).to.equal(expected);
-        expect(kilobytes(1024)).to.equal(expected);
-        expect(parseFloat(kilobytes('.00098mb').toFixed(2))).to.equal(expected);
+        assert.equal(kilobytes('1024'), expected);
+        assert.equal(kilobytes(1024), expected);
+        assert.equal(parseFloat(kilobytes('.00098mb').toFixed(2)), expected);
     });
 
     it('megabytes() should work in the same way, but return megabytes', function () {
         let expected;
 
         expected = 0;
-        expect(megabytes('0')).to.equal(expected);
-        expect(megabytes(undefined)).to.equal(expected);
+        assert.equal(megabytes('0'), expected);
+        assert.equal(megabytes(undefined), expected);
 
         expected = 1;
-        expect(megabytes('1024kb')).to.equal(expected);
-        expect(parseFloat(megabytes('.00098gb').toFixed(2))).to.equal(expected);
+        assert.equal(megabytes('1024kb'), expected);
+        assert.equal(parseFloat(megabytes('.00098gb').toFixed(2)), expected);
     });
 
     it('gigabytes() should work in the same way, but return gigabytes', function () {
         let expected;
 
         expected = 0;
-        expect(gigabytes('0')).to.equal(expected);
-        expect(gigabytes(undefined)).to.equal(expected);
+        assert.equal(gigabytes('0'), expected);
+        assert.equal(gigabytes(undefined), expected);
 
         expected = 1;
-        expect(gigabytes('1024 megabytes')).to.equal(expected);
-        expect(parseFloat(gigabytes('.00098tb').toFixed(2))).to.equal(expected);
+        assert.equal(gigabytes('1024 megabytes'), expected);
+        assert.equal(parseFloat(gigabytes('.00098tb').toFixed(2)), expected);
     });
 
     it('terabytes() should work in the same way, but return terabytes', function () {
         let expected;
 
         expected = 0;
-        expect(terabytes('0')).to.equal(expected);
-        expect(terabytes(undefined)).to.equal(expected);
+        assert.equal(terabytes('0'), expected);
+        assert.equal(terabytes(undefined), expected);
 
         expected = 1;
-        expect(terabytes('1024 gigabytes')).to.equal(expected);
-        expect(terabytes('1023Gb plus 1024Mb')).to.equal(expected);
+        assert.equal(terabytes('1024 gigabytes'), expected);
+        assert.equal(terabytes('1023Gb plus 1024Mb'), expected);
     });
 });
