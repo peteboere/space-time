@@ -8,6 +8,7 @@ const year = day * 365.25;
 const month = (year / 12);
 
 /**
+ * Convert time expression to milliseconds.
  * @param {string | number} time - Time expression or milliseconds
  * @returns {number} Milliseconds
  * @example
@@ -70,6 +71,7 @@ export function ms(time) {
 }
 
 /**
+ * Convert time expression to seconds.
  * @param {string | number} time - Time expression or milliseconds
  * @returns {number} Seconds
  */
@@ -78,6 +80,7 @@ export function seconds(time) {
 }
 
 /**
+ * Convert time expression to minutes.
  * @param {string | number} time - Time expression or milliseconds
  * @returns {number} Minutes
  */
@@ -86,6 +89,7 @@ export function minutes(time) {
 }
 
 /**
+ * Convert time expression to hours.
  * @param {string | number} time - Time expression or milliseconds
  * @returns {number} Hours
  */
@@ -94,6 +98,7 @@ export function hours(time) {
 }
 
 /**
+ * Convert time expression to days.
  * @param {string | number} time - Time expression or milliseconds
  * @returns {number} Days
  */
@@ -102,6 +107,7 @@ export function days(time) {
 }
 
 /**
+ * Convert time expression to weeks.
  * @param {string | number} time - Time expression or milliseconds
  * @returns {number} Weeks
  */
@@ -110,6 +116,7 @@ export function weeks(time) {
 }
 
 /**
+ * Convert time expression to months.
  * @param {string | number} time - Time expression or milliseconds
  * @returns {number} Months
  */
@@ -118,6 +125,7 @@ export function months(time) {
 }
 
 /**
+ * Convert time expression to years.
  * @param {string | number} time - Time expression or milliseconds
  * @returns {number} Years
  */
@@ -141,6 +149,7 @@ years.now = relativeTimeHandler(years);
  * ) => number}
  */
 function relativeTimeHandler(fn) {
+
     return function now(arg, {now=Date.now}={}) {
         const directionPatt = /^\s*([+-])\s*/;
         const m = directionPatt.exec(arg);
@@ -148,6 +157,7 @@ function relativeTimeHandler(fn) {
             throw new TypeError(`Relative time argument requires a '+' or '-' prefix`);
         }
         arg = arg.replace(directionPatt, '');
+
         return fn((m[1] === '-')
             ? (now() - ms(arg))
             : (now() + ms(arg)));

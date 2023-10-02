@@ -4,6 +4,7 @@ const gigabyte = Math.pow(kilobyte, 3);
 const terabyte = Math.pow(kilobyte, 4);
 
 /**
+ * Convert size expression to bytes.
  * @param {string | number} size - Size expression or bytes integer
  * @returns {number} Size in bytes
  * @example
@@ -50,6 +51,7 @@ export function bytes(size) {
 }
 
 /**
+ * Convert size expression to kilobytes.
  * @param {string | number} size - Size expression or bytes integer
  * @returns {number} Size in kilobytes
  */
@@ -58,6 +60,7 @@ export function kilobytes(size) {
 }
 
 /**
+ * Convert size expression to megabytes.
  * @param {string | number} size - Size expression or bytes integer
  * @returns {number} Size in megabytes
  */
@@ -66,6 +69,7 @@ export function megabytes(size) {
 }
 
 /**
+ * Convert size expression to gigabytes.
  * @param {string | number} size - Size expression or bytes integer
  * @returns {number} Size in gigabytes
  */
@@ -74,6 +78,7 @@ export function gigabytes(size) {
 }
 
 /**
+ * Convert size expression to terabytes.
  * @param {string | number} size - Size expression or bytes integer
  * @returns {number} Size in terabytes
  */

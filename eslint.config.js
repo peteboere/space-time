@@ -6,15 +6,6 @@ import js from '@eslint/js';
 export default [
     js.configs.recommended,
     {
-        files: [
-            '**/*.js',
-        ],
-        languageOptions: {
-            parserOptions: {
-                ecmaVersion: 'latest',
-                sourceType: 'module',
-            },
-        },
         rules: {
             'array-bracket-spacing': [2, 'never'],
             'array-element-newline': [2, 'consistent'],
