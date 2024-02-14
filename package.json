@@ -6,8 +6,10 @@
   "scripts": {
     "lint": "eslint --fix .",
     "test": "node --test test/*.js",
-    "ts-check": "tsc -p jsconfig.json"
+    "ts-check": "tsc -p jsconfig.json",
+    "ts-declare": "tsc index.js --declaration --allowJs --emitDeclarationOnly --outDir .types"
   },
+  "types": ".types/index.d.ts",
   "keywords": [
     "humanize",
     "bytes",
